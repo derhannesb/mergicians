@@ -34,7 +34,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.25, 1.25 ) ]
 }
 
-[node name="WaterPart" type="Node2D" index="0"]
+[node name="WaterPart" type="Node2D"]
 
 position = Vector2( 72.3978, 76.6519 )
 script = ExtResource( 1 )
