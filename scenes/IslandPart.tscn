@@ -25,24 +25,24 @@ bounce = 0.0
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="landscape-rocks" type="Sprite" parent="." index="1"]
+[node name="rocks" type="Sprite" parent="." index="1"]
 
 visible = false
 position = Vector2( 0.88266, -2.19424 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="landscape-clay" type="Sprite" parent="." index="2"]
+[node name="clay" type="Sprite" parent="." index="2"]
 
+visible = false
 position = Vector2( 0.300842, 0.230286 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="landscape-grass" type="Sprite" parent="." index="3"]
+[node name="grass" type="Sprite" parent="." index="3"]
 
 visible = false
 position = Vector2( 0.88266, -2.4986 )
-scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
