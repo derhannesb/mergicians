@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/Cloud.gd" type="Script" id=1]
+[ext_resource path="res://gfx/cloud-thin.png" type="Texture" id=2]
+[ext_resource path="res://gfx/cloud-medium.png" type="Texture" id=3]
+[ext_resource path="res://gfx/cloud-thick.png" type="Texture" id=4]
+[ext_resource path="res://gfx/cloud-shape1.png" type="Texture" id=5]
+[ext_resource path="res://gfx/cloud-shape2.png" type="Texture" id=6]
+[ext_resource path="res://gfx/cloud-shape3.png" type="Texture" id=7]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+render_priority = 0
+blend_mode = 4
+light_mode = 0
+
+[node name="Cloud" type="Node2D" index="0"]
+
+material = SubResource( 1 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 1 )
+_sections_unfolded = [ "Material", "Transform" ]
+
+[node name="thin" type="Sprite" parent="." index="0"]
+
+use_parent_material = true
+position = Vector2( 0, -10 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Material", "Visibility" ]
+
+[node name="medium" type="Sprite" parent="." index="1"]
+
+use_parent_material = true
+position = Vector2( 0, -10 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Material", "Visibility" ]
+
+[node name="thick" type="Sprite" parent="." index="2"]
+
+use_parent_material = true
+position = Vector2( 0, -10 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Animation", "Material", "Pause", "Region", "Transform", "Visibility", "Z Index" ]
+
+[node name="shape1" type="Sprite" parent="." index="3"]
+
+visible = false
+use_parent_material = true
+position = Vector2( 0, -10 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Material" ]
+
+[node name="shape2" type="Sprite" parent="." index="4"]
+
+visible = false
+use_parent_material = true
+texture = ExtResource( 6 )
+_sections_unfolded = [ "Material" ]
+
+[node name="shape3" type="Sprite" parent="." index="5"]
+
+visible = false
+use_parent_material = true
+position = Vector2( 0, -10 )
+texture = ExtResource( 7 )
+_sections_unfolded = [ "Material" ]
+
+
