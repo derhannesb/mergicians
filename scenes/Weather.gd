@@ -3,6 +3,8 @@ extends Node2D
 var pl_storm = preload("res://scenes/Storm.tscn")
 var pl_cloud = preload("res://scenes/Cloud.tscn")
 
+signal storm_removed
+
 func _ready():
 	var size = Config.size
 	
@@ -16,11 +18,11 @@ func _ready():
 		var storm = pl_storm.instance ()
 		storm.position = Vector2 (rand_range (0.0, size.x),
 		                          rand_range (0.0, size.y))
+		storm.connect("storm_removed", self, "_on_storm_removed")
+	
 		self.add_child (storm)
 		
 
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func _on_storm_removed():
+	print("STORM REMOVED")

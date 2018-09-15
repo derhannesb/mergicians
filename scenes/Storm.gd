@@ -14,6 +14,8 @@ var direction = Vector2(0,0)
 
 const clip_boundary = 128
 
+signal storm_removed
+
 func _ready():
 	var circle = CircleShape2D.new()
 	$Area2D/C2DInner.shape = circle
@@ -51,6 +53,7 @@ func _physics_process(delta):
 	|| position.y > Config.size.y + clip_boundary
 	|| position.x < -clip_boundary
 	|| position.y < -clip_boundary ):
+		emit_signal("storm_removed")
 		self.queue_free()
 			
 func _on_Area2D_body_entered(body):
