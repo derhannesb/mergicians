@@ -11,6 +11,13 @@ func _ready():
 		cloud.position = Vector2 (rand_range (0.0, size.x),
 		                          rand_range (0.0, size.y))
 		self.add_child (cloud)
+		
+	for i in range (15 + randi() % 20):
+		var storm = pl_storm.instance ()
+		storm.position = Vector2 (rand_range (0.0, size.x),
+		                          rand_range (0.0, size.y))
+		self.add_child (storm)
+		
 
 
 #func _process(delta):
