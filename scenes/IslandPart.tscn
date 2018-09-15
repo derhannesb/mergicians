@@ -9,7 +9,7 @@
 custom_solver_bias = 0.0
 radius = 100.0
 
-[node name="IslandPart" type="StaticBody2D" index="0"]
+[node name="IslandPart" type="StaticBody2D"]
 
 position = Vector2( 373.713, 320.776 )
 input_pickable = false
