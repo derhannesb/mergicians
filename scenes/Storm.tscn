@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://gfx/cloud-medium.png" type="Texture" id=1]
-[ext_resource path="res://gfx/cloud-shape1.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Storm.gd" type="Script" id=1]
+[ext_resource path="res://gfx/cloud-medium.png" type="Texture" id=2]
+[ext_resource path="res://gfx/cloud-shape1.png" type="Texture" id=3]
 
 [sub_resource type="Gradient" id=1]
 
@@ -83,16 +84,30 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 180.0, 360.0 ]
+"values": [ 0.0, 180.0, 359.0 ]
 }
 
-[node name="Wind" type="Node2D"]
+[sub_resource type="CircleShape2D" id=7]
+
+custom_solver_bias = 0.0
+radius = 150.0
+
+[node name="Storm" type="Node2D" groups=[
+"storm",
+]]
 
 position = Vector2( 71.375, 97.5222 )
-rotation = 3.49882
+rotation = 4.10463
+script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Particles2D" type="Particles2D" parent="." index="0"]
+[node name="Graphics" type="Node2D" parent="." index="0"]
+
+editor/display_folded = true
+rotation = 3.10261
+_sections_unfolded = [ "Transform" ]
+
+[node name="Particles2D" type="Particles2D" parent="Graphics" index="0"]
 
 emitting = true
 amount = 64
@@ -108,13 +123,13 @@ visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 5 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 normal_map = null
 h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Drawing", "Material", "Process Material", "Textures", "Time" ]
 
-[node name="Particles2D2" type="Particles2D" parent="." index="1"]
+[node name="Particles2D2" type="Particles2D" parent="Graphics" index="1"]
 
 emitting = true
 amount = 32
@@ -130,21 +145,42 @@ visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 normal_map = null
 h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Drawing", "Material", "Process Material", "Textures", "Transform" ]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics" index="2"]
 
 root_node = NodePath("..")
 autoplay = "Rotation"
 playback_process_mode = 1
 playback_default_blend_time = 0.0
-playback_speed = 0.5
+playback_speed = 2.0
 anims/Rotation = SubResource( 6 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
+
+[node name="Area2D" type="Area2D" parent="." index="1"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 2
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+shape = SubResource( 7 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
 
 
