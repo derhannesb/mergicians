@@ -4,82 +4,118 @@ var pl_island_part = preload("res://scenes/IslandPart.tscn")
 var pl_water_part = preload("res://scenes/WaterPart.tscn")
 
 func _ready():
+	var size = Vector2 (get_viewport().size.x * 8,
+	                    get_viewport().size.y * 8)
 	randomize()
-	generate_water()
-	generate_islands()
+	generate_water (size)
+	generate_islands (size)
 	
-func generate_water():
+func generate_water (var size):
 	var bigprime = 9973
-	var num_x = int (get_viewport().size.x / 111 + 1)
-	var num_y = int (get_viewport().size.y / 128 + 2)
-	for i in range(0,num_x):
-		for a in range(0,num_y):
-			var water_part = pl_water_part.instance()
+	var num_x = int (size.x / 111 + 1)
+	var num_y = int (size.y / 128 + 2)
+	for i in range(0, num_x):
+		for a in range(0, num_y):
+			var water_part = pl_water_part.instance ()
 			var x = (i*bigprime) % num_x
 			var y = (a*bigprime) % num_y
 			water_part.position.x = x * 111
 			water_part.position.y = y * 128 - (x%2)*64
-			water_part.rotation_degrees = rand_range(0,359)
-			self.add_child(water_part)
+			water_part.rotation_degrees = rand_range (0, 360)
+			self.add_child (water_part)
 
-func generate_islands():
-	for i in range(0,6):
-		generate_island(Vector2(rand_range(0,1920), rand_range(0,1080)))
-	
-func shuffleList(list):
+func shuffleList (var list):
 	var shuffledList = [] 
-	var indexList = range(list.size())
-	for i in range(list.size()):
-		var x = randi() % indexList.size()
-		shuffledList.append(list[indexList[x]])
+	var indexList = range (list.size())
+	for i in range (list.size()):
+		var x = randi () % indexList.size()
+		shuffledList.append (list[indexList[x]])
 		indexList.remove(x)
 	return shuffledList
 
-func generate_island(var position):
+func generate_islands (var size):
+	var elements = Dictionary()
+	var num_x = int (size.x / 111 + 1)
+	var num_y = int (size.y / 128 + 2)
+
+	for i in range(0, 8 + randi() % 10):
+		generate_island (elements,
+		                 Vector2 (randi () % num_x,
+		                          randi () % num_y))
+	render_elements (elements)
+
+func generate_island (var elements,
+                      var start_position):
+
+	for a in range (0, 15 + rand_range (1, 50)):
+		var x = int (start_position.x)
+		var y = int (start_position.y)
+
+		for i in range (0, 20):
+			var dir = randi () % 6
+			var off = y % 1
+			
+			if dir == 0:
+				x += 1
+				y += 0
+			elif dir == 1:
+				x += off
+				y += 1
+			elif dir == 2:
+				x += off - 1
+				y += 1
+			elif dir == 3:
+				x += -1
+				y += 0
+			elif dir == 4:
+				x += off - 1
+				y += -1
+			elif dir == 5:
+				x += off
+				y += -1
+				
+			var key = str (x) + "," + str (y)
+			if elements.has (key):
+				elements[key].z += 1
+			else:
+				elements[key] = Vector3 (x, y, 1)
+				break
+
+func render_elements (elements):
+	var keys = elements.keys()
 	var dx = 128 * 0.3
 	var dy = 111 * 0.3
-	var elements = Dictionary()
-	
-	var start_position = position
-	
-	for a in range(0, 15 + rand_range (1, 50)):
-		position = start_position
-		for i in range (0, 20):
-			var dir = int (rand_range (0, 6))
-			if dir == 0:
-				position = Vector2 (position.x + dx, position.y)
-			elif dir == 1:
-				position = Vector2 (position.x + dx/2, position.y + dy)
-			elif dir == 2:
-				position = Vector2 (position.x - dx/2, position.y + dy)
-			elif dir == 3:
-				position = Vector2 (position.x - dx, position.y)
-			elif dir == 4:
-				position = Vector2 (position.x - dx/2, position.y - dy)
-			elif dir == 5:
-				position = Vector2 (position.x + dx/2, position.y - dy)
-				
-			var key = "" + str (int(position.x)) + "," + str(int(position.y))
-			if not elements.has (key):
-				elements[key] = Vector3 (position.x, position.y, 1)
-				break
-			else:
-				elements[key].z += 1
-				
-	var keys = elements.keys()
+	var claylimit = 2
+	var rocklimit = 16
 	keys.invert()
 	
 	for key in keys:
-		var island_part = pl_island_part.instance()
-		if elements[key].z == 1:
+		var type = elements[key].z
+		
+		if type > claylimit and type < rocklimit:
+			continue
+			
+		var island_part = pl_island_part.instance ()
+		if type <= claylimit:
 			island_part.get_node ("clay").show ()
-		elif elements[key].z < 20:
-			island_part.get_node ("grass").show ()
 		else:
 			island_part.get_node ("rocks").show ()
+
+		island_part.position = (Vector2 (elements[key].x * dx + (int (elements[key].y) % 2) * dx/2,
+		                                 elements[key].y * dy) +
+		                        Vector2 (rand_range (-7,7), rand_range (-7,7)))
+		island_part.rotation_degrees = rand_range (0,359)
+		self.add_child (island_part)
+
+	for key in keys:
+		var type = elements[key].z
+		if type <= claylimit or type >= rocklimit:
+			continue
 			
-		island_part.position = Vector2 (elements[key].x + rand_range (-7, 7),
-		                                elements[key].y + rand_range (-7, 7))
-		island_part.rotation_degrees = rand_range(0,359)
-		self.add_child(island_part)
-	
+		var island_part = pl_island_part.instance ()
+		island_part.get_node ("grass").show ()
+		island_part.position = (Vector2 (elements[key].x * dx + (int (elements[key].y) % 2) * dx/2,
+		                                 elements[key].y * dy) +
+		                        Vector2 (rand_range (-7,7), rand_range (-7,7)))
+		island_part.rotation_degrees = rand_range (0,359)
+		self.add_child (island_part)
