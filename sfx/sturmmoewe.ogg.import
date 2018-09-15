@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sturmmoewe.ogg-7ef2d908a7ccd5e268c17ccb228f4ac8.oggstr"
+
+[deps]
+
+source_file="res://sfx/sturmmoewe.ogg"
+dest_files=[ "res://.import/sturmmoewe.ogg-7ef2d908a7ccd5e268c17ccb228f4ac8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

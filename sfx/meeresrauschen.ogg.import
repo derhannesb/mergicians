@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/meeresrauschen.ogg-08287308f05d5f371a50c80b20dde2ff.oggstr"
+
+[deps]
+
+source_file="res://sfx/meeresrauschen.ogg"
+dest_files=[ "res://.import/meeresrauschen.ogg-08287308f05d5f371a50c80b20dde2ff.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
