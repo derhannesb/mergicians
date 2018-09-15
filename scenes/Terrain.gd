@@ -4,8 +4,8 @@ var pl_island_part = preload("res://scenes/IslandPart.tscn")
 var pl_water_part = preload("res://scenes/WaterPart.tscn")
 
 func _ready():
-	var size = Vector2 (get_viewport().size.x * 8,
-	                    get_viewport().size.y * 8)
+	var size = Vector2 (get_viewport().size.x * 5,
+	                    get_viewport().size.y * 5)
 	randomize()
 	generate_water (size)
 	generate_islands (size)
@@ -35,10 +35,10 @@ func shuffleList (var list):
 
 func generate_islands (var size):
 	var elements = Dictionary()
-	var num_x = int (size.x / 111 + 1)
-	var num_y = int (size.y / 128 + 2)
+	var num_x = int (size.x / (128 * 0.3) + 1)
+	var num_y = int (size.y / (111 * 0.3) + 2)
 
-	for i in range(0, 8 + randi() % 10):
+	for i in range(0, 35 + randi() % 40):
 		generate_island (elements,
 		                 Vector2 (randi () % num_x,
 		                          randi () % num_y))
@@ -47,7 +47,7 @@ func generate_islands (var size):
 func generate_island (var elements,
                       var start_position):
 
-	for a in range (0, 15 + rand_range (1, 50)):
+	for a in range (0, 20 + rand_range (1, 100)):
 		var x = int (start_position.x)
 		var y = int (start_position.y)
 
@@ -73,7 +73,7 @@ func generate_island (var elements,
 			elif dir == 5:
 				x += off
 				y += -1
-				
+
 			var key = str (x) + "," + str (y)
 			if elements.has (key):
 				elements[key].z += 1
@@ -88,13 +88,13 @@ func render_elements (elements):
 	var claylimit = 2
 	var rocklimit = 16
 	keys.invert()
-	
+
 	for key in keys:
 		var type = elements[key].z
-		
+
 		if type > claylimit and type < rocklimit:
 			continue
-			
+
 		var island_part = pl_island_part.instance ()
 		if type <= claylimit:
 			island_part.get_node ("clay").show ()
@@ -111,7 +111,7 @@ func render_elements (elements):
 		var type = elements[key].z
 		if type <= claylimit or type >= rocklimit:
 			continue
-			
+
 		var island_part = pl_island_part.instance ()
 		island_part.get_node ("grass").show ()
 		island_part.position = (Vector2 (elements[key].x * dx + (int (elements[key].y) % 2) * dx/2,
