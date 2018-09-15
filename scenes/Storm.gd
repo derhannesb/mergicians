@@ -30,6 +30,16 @@ func _ready():
 	
 func _physics_process(delta):
 	position += direction
+	energy-= energy_per_push*0.01
+	
+	if (energy <= 0 
+	|| position.x  > Config.size.x + clip_boundary
+	|| position.y > Config.size.y + clip_boundary
+	|| position.x < -clip_boundary
+	|| position.y < -clip_boundary ):
+		emit_signal("storm_removed")
+		self.queue_free()
+	
 	for body in trapped:
 		var distance = body.global_position.distance_to(global_position)
 		if (distance <= inner_radius):
@@ -38,7 +48,7 @@ func _physics_process(delta):
 			var normalized_difference = position_difference.normalized()
 	
 			body.apply_impulse(Vector2(0,0), normalized_difference*(inner_radius+60-distance ))
-			
+			energy -= energy_per_push 
 		else:
 			#push energy to boat:
 			body.push_energy(energy_per_push)
@@ -46,15 +56,10 @@ func _physics_process(delta):
 			if (energy < 0):
 				energy = 0
 				body.exit_storm()
+		if (energy <= 0):
+			body.exit_storm()
+			
 	modulate = Color(1,1,1,energy/max_energy)
-
-	if (energy == 0 
-	|| position.x  > Config.size.x + clip_boundary
-	|| position.y > Config.size.y + clip_boundary
-	|| position.x < -clip_boundary
-	|| position.y < -clip_boundary ):
-		emit_signal("storm_removed")
-		self.queue_free()
 			
 func _on_Area2D_body_entered(body):
 	if (body.is_in_group("ship")):
