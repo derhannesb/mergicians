@@ -2,16 +2,25 @@ extends Node2D
 
 var pl_island_part = preload("res://scenes/IslandPart.tscn")
 var pl_water_part = preload("res://scenes/WaterPart.tscn")
+var pl_windmill = preload("res://scenes/Windmill.tscn")
 
 var size
+var elements
+
+var dx = 128 * 0.3
+var dy = 111 * 0.3
+var claylimit = 2
+var rocklimit = 50
 
 func _ready():
 	size = Config.size
+	elements = Dictionary ()
 	randomize()
-	generate_water (size)
-	generate_islands (size)
+	generate_water ()
+	generate_islands ()
+	generate_windmills ()
 
-func generate_water (var size):
+func generate_water ():
 	var bigprime = 9973
 	var num_x = int (size.x / 111 + 1)
 	var num_y = int (size.y / 128 + 2)
@@ -34,19 +43,17 @@ func shuffleList (var list):
 		indexList.remove(x)
 	return shuffledList
 
-func generate_islands (var size):
+func generate_islands ():
 	var elements = Dictionary()
 	var num_x = int (size.x / (128 * 0.3) + 1)
 	var num_y = int (size.y / (111 * 0.3) + 2)
 
 	for i in range(0, 35 + randi() % 40):
-		generate_island (elements,
-		                 Vector2 (randi () % num_x,
+		generate_island (Vector2 (randi () % num_x,
 		                          randi () % num_y))
-	render_elements (elements)
+	render_elements ()
 
-func generate_island (var elements,
-                      var start_position):
+func generate_island (var start_position):
 
 	for a in range (0, 20 + rand_range (1, 100)):
 		var x = int (start_position.x)
@@ -82,12 +89,8 @@ func generate_island (var elements,
 				elements[key] = Vector3 (x, y, 1)
 				break
 
-func render_elements (elements):
+func render_elements ():
 	var keys = elements.keys()
-	var dx = 128 * 0.3
-	var dy = 111 * 0.3
-	var claylimit = 2
-	var rocklimit = 50
 	keys.invert()
 
 	for key in keys:
@@ -131,3 +134,21 @@ func render_elements (elements):
 		                        Vector2 (rand_range (-7,7), rand_range (-7,7)))
 		island_part.rotation_degrees = rand_range (0,359)
 		self.add_child (island_part)
+		
+func generate_windmills ():
+	var keys = elements.keys ()
+	keys = shuffleList (keys)
+	
+	var num_mills = 20 + randi () % 20
+	
+	for key in keys:
+		var e = elements[key]
+		if e.z > claylimit and e.z < rocklimit:
+			var mill = pl_windmill.instance ()
+			mill.position = Vector2 (e.x * dx + (int (e.y) % 2) * dx/2, e.y * dy)
+			self.add_child (mill)
+			num_mills -= 1
+			if num_mills <= 0:
+				break
+		
+	
