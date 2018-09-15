@@ -11,6 +11,8 @@ var energy = max_energy / 2
 
 var storm = null
 
+var score = 0
+
 func _ready():
 	$EnergyBeam.hide()
 
@@ -74,6 +76,7 @@ func add_wind_generator():
 		update_energy(-energy_slice)
 		
 		var wind_generator = pl_wind_generator.instance()
+		wind_generator.generated_by = self
 		wind_generator.energy = energy_slice * 10
 		wind_generator.position = $Placement/PlacementCircle/PlacementCircleRotation.global_position
 		wind_generator.rotation = $Placement/PlacementCircle/PlacementCircleRotation.global_rotation - PI
@@ -91,3 +94,9 @@ func update_energy(add_energy):
 	if (self.energy > self.max_energy):
 		self.energy = self.max_energy
 	$GUI/EnergyMeter.value = self.energy
+	
+func increase_score(value):
+	score+=value
+	$GUI/Score.text = str(score)
+	$GUI/ScoreAnimationPlayer.play("Score")
+	

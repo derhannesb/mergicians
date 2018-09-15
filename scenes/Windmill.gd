@@ -15,6 +15,5 @@ func _process(delta):
 		$AnimationPlayer.playback_speed = 0
 
 func blow(energy):
-	print(self.energy)
 	self.energy += energy*8
 	

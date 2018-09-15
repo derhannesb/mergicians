@@ -7,6 +7,7 @@ export var energy = 100
 export var initial_strength = 0.01
 var strength = energy / strength_factor
 var energy_step = 0
+var generated_by = null
 
 func _ready():
 	pass
@@ -27,4 +28,4 @@ func _physics_process(delta):
 		
 		if (collider.is_in_group("windmill")):
 			collider.get_parent().blow(strength)
-			
+			generated_by.increase_score(1)
