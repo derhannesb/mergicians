@@ -87,13 +87,13 @@ tracks/0/keys = {
 "values": [ 0.0, 180.0, 359.0 ]
 }
 
-[node name="Storm" type="Node2D" groups=[
+[node name="Storm" type="Node2D" index="0" groups=[
 "storm",
 ]]
 
 position = Vector2( 134.615, 95.3415 )
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 inner_radius = 20
 outer_radius = 1000
 

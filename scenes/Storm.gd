@@ -2,6 +2,10 @@ extends Node2D
 
 var trapped = Array()
 
+var max_energy = 100.0
+var energy = max_energy
+var energy_per_push = 0.1
+
 export var inner_radius = 20
 export var outer_radius = 1000 
 
@@ -26,7 +30,15 @@ func _physics_process(delta):
 			
 		else:
 			#push energy to boat:
-			body.push_energy(1)
+			body.push_energy(energy_per_push)
+			energy -= energy_per_push
+			if (energy < 0):
+				energy = 0
+				body.exit_storm()
+	modulate = Color(1,1,1,energy/max_energy)
+
+	if (energy == 0):
+		self.queue_free()	
 			
 func _on_Area2D_body_entered(body):
 	if (body.is_in_group("ship")):
