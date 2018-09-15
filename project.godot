@@ -14,6 +14,10 @@ config/name="Mergicians"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Config="*res://scenes/Config.gd"
+
 [display]
 
 window/size/width=1920

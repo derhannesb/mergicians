@@ -2,17 +2,15 @@ extends Node2D
 
 var pl_island_part = preload("res://scenes/IslandPart.tscn")
 var pl_water_part = preload("res://scenes/WaterPart.tscn")
-var pl_cloud = preload("res://scenes/Cloud.tscn")
 
+var size
 
 func _ready():
-	var size = Vector2 (get_viewport().size.x * 5,
-	                    get_viewport().size.y * 5)
+	size = Config.size
 	randomize()
 	generate_water (size)
 	generate_islands (size)
-	generate_clouds (size)
-	
+
 func generate_water (var size):
 	var bigprime = 9973
 	var num_x = int (size.x / 111 + 1)
@@ -27,13 +25,6 @@ func generate_water (var size):
 			water_part.rotation_degrees = rand_range (0, 360)
 			self.add_child (water_part)
 
-func generate_clouds (var size):
-	for i in range (30 + randi () % 20):
-		var c = pl_cloud.instance ()
-		c.position.x = rand_range (0, size.x)
-		c.position.y = rand_range (0, size.y)
-		self.add_child (c)
-		
 func shuffleList (var list):
 	var shuffledList = [] 
 	var indexList = range (list.size())
