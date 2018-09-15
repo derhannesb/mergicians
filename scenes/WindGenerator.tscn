@@ -5,8 +5,8 @@
 
 [sub_resource type="Gradient" id=1]
 
-offsets = PoolRealArray( 0, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+offsets = PoolRealArray( 0, 0.201183, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.386745, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=2]
 
@@ -86,19 +86,23 @@ tracks/0/keys = {
 "values": [ 15.0, 0.0, -30.0 ]
 }
 
-[node name="WindGenerator" type="Node2D"]
+[node name="WindGenerator" type="Node2D" index="0" groups=[
+"windgenerator",
+]]
 
+editor/display_folded = true
 position = Vector2( 368.23, 118.955 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-strength = 0.01
+energy = 100
+initial_strength = 0.01
 
 [node name="Particles2D" type="Particles2D" parent="." index="0"]
 
 scale = Vector2( 0.2, 0.2 )
 emitting = true
 amount = 128
-lifetime = 3.0
+lifetime = 4.0
 one_shot = false
 preprocess = 5.0
 speed_scale = 1.0
@@ -114,7 +118,7 @@ texture = ExtResource( 2 )
 normal_map = null
 h_frames = 1
 v_frames = 1
-_sections_unfolded = [ "Material", "Process Material", "Textures", "Time", "Transform" ]
+_sections_unfolded = [ "Drawing", "Process Material", "Visibility" ]
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="1"]
 
