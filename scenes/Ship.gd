@@ -33,11 +33,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("right_secondary"):
 		$Placement/PlacementCircle/PlacementCircleRotation.rotation_degrees += placement_speed_rotation
 	if Input.is_action_pressed("action") && cooldown == 0:
-		var wind_generator = pl_wind_generator.instance()
-		wind_generator.position = $Placement/PlacementCircle/PlacementCircleRotation.global_position
-		wind_generator.rotation = $Placement/PlacementCircle/PlacementCircleRotation.global_rotation - PI
-		get_parent().add_child(wind_generator)
-		cooldown = 1
+		add_wind_generator()
 	if Input.is_action_pressed ("zoom_in"):
 		$Camera2D.zoom *= 0.99
 	if Input.is_action_pressed ("zoom_out"):
@@ -67,6 +63,23 @@ func enter_storm(storm):
 func exit_storm():
 	self.storm = null
 	$EnergyBeam.hide()
+
+func add_wind_generator():
+	if (energy > 0):
+		var energy_slice = 10
+		if (energy-10 < 0):
+			energy_slice += energy-10
+			energy = 0
+		
+		update_energy(-energy_slice)
+		
+		var wind_generator = pl_wind_generator.instance()
+		wind_generator.energy = energy_slice * 10
+		wind_generator.position = $Placement/PlacementCircle/PlacementCircleRotation.global_position
+		wind_generator.rotation = $Placement/PlacementCircle/PlacementCircleRotation.global_rotation - PI
+		get_parent().add_child(wind_generator)
+		cooldown = 1
+		
 	
 func push_energy(var energy):
 	update_energy(energy)

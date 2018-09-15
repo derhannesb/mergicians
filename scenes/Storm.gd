@@ -4,7 +4,7 @@ var trapped = Array()
 
 var max_energy = 100.0
 var energy = max_energy
-var energy_per_push = 0.1
+var energy_per_push = 0.25
 
 export var inner_radius = 20
 export var outer_radius = 1000 

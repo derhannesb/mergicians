@@ -1,28 +1,28 @@
 [gd_resource type="ParticlesMaterial" load_steps=5 format=2]
 
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=1]
 
-offsets = PoolRealArray( 0, 0.14, 0.61, 1 )
-colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+offsets = PoolRealArray( 0, 0.226667, 0.366667, 0.453333, 0.64, 0.813333, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 0.106445, 0.851562, 0.816635, 1, 0.732928, 0.800896, 0.131675, 1, 0.147293, 0.769531, 0.186183, 1, 0.815467, 0.464177, 0.855178, 0.628378, 0.931482, 0.924256, 0.746493, 0.297297, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=11]
+[sub_resource type="GradientTexture" id=2]
 
 flags = 4
-gradient = SubResource( 10 )
+gradient = SubResource( 1 )
 width = 2048
 
-[sub_resource type="Curve" id=12]
+[sub_resource type="Curve" id=3]
 
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
 _data = [ Vector2( 0, 1 ), 0.0, 0.0831801, 0, 0, Vector2( 1, 0.134766 ), -2.257, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=13]
+[sub_resource type="CurveTexture" id=4]
 
 flags = 4
 width = 2048
-curve = SubResource( 12 )
+curve = SubResource( 3 )
 
 [resource]
 
@@ -53,8 +53,8 @@ angle = 360.0
 angle_random = 1.0
 scale = 0.1
 scale_random = 0.0
-scale_curve = SubResource( 13 )
-color_ramp = SubResource( 11 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 hue_variation = 0.0
 hue_variation_random = 0.0
 anim_speed = 50.0
