@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 100.0
+radius = 228.596
 
 [node name="IslandPart" type="StaticBody2D" index="0"]
 
@@ -20,31 +20,32 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
-
-scale = Vector2( 0.3, 0.3 )
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="rocks" type="Sprite" parent="." index="1"]
+[node name="rocks" type="Sprite" parent="." index="0"]
 
 visible = false
-position = Vector2( 0.88266, -2.19424 )
+position = Vector2( -1.50064, -13.3163 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="clay" type="Sprite" parent="." index="2"]
+[node name="clay" type="Sprite" parent="." index="1"]
 
 visible = false
-position = Vector2( 0.300842, 0.230286 )
+position = Vector2( -1.28799, -3.74188 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="grass" type="Sprite" parent="." index="3"]
+[node name="grass" type="Sprite" parent="." index="2"]
 
 visible = false
 position = Vector2( 0.88266, -2.4986 )
 texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+
+position = Vector2( 1.98611, 1.58881 )
+scale = Vector2( 0.3, 0.3 )
+shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 
