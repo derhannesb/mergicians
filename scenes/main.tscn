@@ -2,8 +2,8 @@
 
 [ext_resource path="res://scenes/Terrain.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Ship.gd" type="Script" id=2]
-[ext_resource path="res://gfx/landscape-grass.png" type="Texture" id=3]
-[ext_resource path="res://gfx/landscape-rocks.png" type="Texture" id=4]
+[ext_resource path="res://gfx/compass.png" type="Texture" id=3]
+[ext_resource path="res://gfx/arrow.png" type="Texture" id=4]
 [ext_resource path="res://gfx/cloud-shape3.png" type="Texture" id=5]
 [ext_resource path="res://gfx/WizardBoat.png" type="Texture" id=6]
 [ext_resource path="res://gfx/Sail.png" type="Texture" id=7]
@@ -83,10 +83,11 @@ radius = 25.0
 
 script = ExtResource( 1 )
 
-[node name="Ship" type="RigidBody2D" parent="." index="1"]
+[node name="Ship" type="RigidBody2D" parent="." index="1" groups=[
+"ship",
+]]
 
-editor/display_folded = true
-position = Vector2( 26.3652, 29.89 )
+position = Vector2( 299.754, 213.451 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -107,19 +108,48 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 2 )
 
-[node name="PlacementCircle" type="Sprite" parent="Ship" index="0"]
+[node name="Camera2D" type="Camera2D" parent="Ship" index="0"]
 
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
+editor_draw_screen = true
+editor_draw_limits = true
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Smoothing" ]
+
+[node name="PlacementCircle" type="Sprite" parent="Ship" index="1"]
+
+editor/display_folded = true
 modulate = Color( 1, 1, 1, 0.492902 )
-position = Vector2( 2.37486, -0.647165 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="PlacementCircleRotation" type="Sprite" parent="Ship/PlacementCircle" index="0"]
 
-position = Vector2( -0.503633, 119.865 )
+position = Vector2( 0, 255 )
+scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="Trail" type="Node2D" parent="Ship" index="1"]
+[node name="Trail" type="Node2D" parent="Ship" index="2"]
 
 editor/display_folded = true
 rotation = -3.14159
@@ -147,18 +177,18 @@ h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Drawing", "Process Material", "Time" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship" index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship" index="3"]
 
 shape = SubResource( 6 )
 
-[node name="Ship" type="Sprite" parent="Ship" index="3"]
+[node name="Ship" type="Sprite" parent="Ship" index="4"]
 
 texture = ExtResource( 6 )
 _sections_unfolded = [ "Material", "Visibility" ]
 
-[node name="Sail" type="Sprite" parent="Ship" index="4"]
+[node name="Sail" type="Sprite" parent="Ship" index="5"]
 
-position = Vector2( 5.05684, -2.82853 )
+position = Vector2( 4.82962, -20.5531 )
 texture = ExtResource( 7 )
 
 
