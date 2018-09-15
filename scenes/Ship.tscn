@@ -130,8 +130,6 @@ _sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Smoothing", "Transform
 
 [node name="Placement" type="Node2D" parent="." index="1"]
 
-editor/display_folded = true
-
 [node name="PlacementCircle" type="Sprite" parent="Placement" index="0"]
 
 editor/display_folded = true
@@ -180,12 +178,16 @@ shape = SubResource( 6 )
 
 [node name="Ship" type="Sprite" parent="." index="4"]
 
+position = Vector2( 0.246002, -3.451 )
 texture = ExtResource( 5 )
-_sections_unfolded = [ "Material", "Visibility" ]
+offset = Vector2( 0, 5 )
+_sections_unfolded = [ "Material", "Offset", "Visibility" ]
 
 [node name="Sail" type="Sprite" parent="." index="5"]
 
-position = Vector2( 4.82962, -20.5531 )
+position = Vector2( 0.246002, -3.451 )
 texture = ExtResource( 6 )
+offset = Vector2( 5, -15 )
+_sections_unfolded = [ "Offset" ]
 
 

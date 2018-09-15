@@ -45,3 +45,7 @@ func _physics_process(delta):
 	#$Trail/TrailParticles.lifetime = linear_velocity.length() / 20
 	#$Trail.rotation = position.angle_to(linear_velocity.normalized()) - PI/2 - rotation
 	$Trail/Particles2D.speed_scale = 0.1 + linear_velocity.length() / 50
+	
+	# $Ship.rotation = position.angle_to (linear_velocity.normalized()) - PI/2 - rotation
+	$Sail.rotation = - rotation
+	
