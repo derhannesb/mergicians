@@ -9,7 +9,7 @@
 custom_solver_bias = 0.0
 radius = 100.0
 
-[node name="IslandPart" type="StaticBody2D"]
+[node name="IslandPart" type="StaticBody2D" index="0"]
 
 position = Vector2( 373.713, 320.776 )
 input_pickable = false
@@ -22,6 +22,7 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
+scale = Vector2( 0.3, 0.3 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
@@ -29,6 +30,7 @@ _sections_unfolded = [ "Transform" ]
 
 visible = false
 position = Vector2( 0.88266, -2.19424 )
+scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
@@ -36,6 +38,7 @@ _sections_unfolded = [ "Transform" ]
 
 visible = false
 position = Vector2( 0.300842, 0.230286 )
+scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
@@ -43,6 +46,7 @@ _sections_unfolded = [ "Transform" ]
 
 visible = false
 position = Vector2( 0.88266, -2.4986 )
+scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 

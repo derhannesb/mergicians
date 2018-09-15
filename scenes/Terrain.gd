@@ -23,7 +23,7 @@ func generate_water():
 			self.add_child(water_part)
 
 func generate_islands():
-	for i in range(0,1):
+	for i in range(0,6):
 		generate_island(Vector2(rand_range(0,1920), rand_range(0,1080)))
 	
 func shuffleList(list):
@@ -36,15 +36,15 @@ func shuffleList(list):
 	return shuffledList
 
 func generate_island(var position):
-	var dx = 128
-	var dy = 111
+	var dx = 128 * 0.3
+	var dy = 111 * 0.3
 	var elements = Dictionary()
 	
 	var start_position = position
 	
-	for a in range(0, 5 + rand_range (1, 16)):
+	for a in range(0, 15 + rand_range (1, 50)):
 		position = start_position
-		for i in range (0, 10):
+		for i in range (0, 20):
 			var dir = int (rand_range (0, 6))
 			if dir == 0:
 				position = Vector2 (position.x + dx, position.y)
@@ -67,19 +67,19 @@ func generate_island(var position):
 				elements[key].z += 1
 				
 	var keys = elements.keys()
-	keys = shuffleList (keys)
+	keys.invert()
 	
 	for key in keys:
 		var island_part = pl_island_part.instance()
 		if elements[key].z == 1:
 			island_part.get_node ("clay").show ()
-		elif elements[key].z < 3:
-			island_part.get_node ("rocks").show ()
-		else:
+		elif elements[key].z < 20:
 			island_part.get_node ("grass").show ()
+		else:
+			island_part.get_node ("rocks").show ()
 			
-		island_part.position = Vector2 (elements[key].x + rand_range (-20, 20),
-		                                elements[key].y + rand_range (-20, 20))
+		island_part.position = Vector2 (elements[key].x + rand_range (-7, 7),
+		                                elements[key].y + rand_range (-7, 7))
 		island_part.rotation_degrees = rand_range(0,359)
 		self.add_child(island_part)
 	
