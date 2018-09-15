@@ -15,14 +15,17 @@ func _ready():
 		self.add_child (cloud)
 		
 	for i in range (15 + randi() % 20):
-		var storm = pl_storm.instance ()
-		storm.position = Vector2 (rand_range (0.0, size.x),
-		                          rand_range (0.0, size.y))
-		storm.connect("storm_removed", self, "_on_storm_removed")
-	
-		self.add_child (storm)
-		
+		place_storm ()
 
+func place_storm ():
+	var size = Config.size
+	var storm = pl_storm.instance ()
+	storm.position = Vector2 (rand_range (0.0, size.x),
+	                          rand_range (0.0, size.y))
+	storm.connect("storm_removed", self, "_on_storm_removed")
+
+	self.add_child (storm)
+	
 
 func _on_storm_removed():
-	print("STORM REMOVED")
+	place_storm ()
