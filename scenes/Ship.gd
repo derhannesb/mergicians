@@ -34,6 +34,10 @@ func _physics_process(delta):
 		wind_generator.rotation = $Placement/PlacementCircle/PlacementCircleRotation.global_rotation - PI
 		get_parent().add_child(wind_generator)
 		cooldown = 1
+	if Input.is_action_pressed ("zoom_in"):
+		$Camera2D.zoom *= 0.99
+	if Input.is_action_pressed ("zoom_out"):
+		$Camera2D.zoom /= 0.99
 		
 		#apply_impulse(Vector2(0,0), Vector2(-10,0))
 	#$Trail/TrailParticles.lifetime = linear_velocity.length() / 20
