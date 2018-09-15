@@ -30,7 +30,6 @@ _sections_unfolded = [ "Transform" ]
 
 visible = false
 position = Vector2( 0.88266, -2.19424 )
-scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
@@ -38,7 +37,6 @@ _sections_unfolded = [ "Transform" ]
 
 visible = false
 position = Vector2( 0.300842, 0.230286 )
-scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
@@ -46,7 +44,6 @@ _sections_unfolded = [ "Transform" ]
 
 visible = false
 position = Vector2( 0.88266, -2.4986 )
-scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 

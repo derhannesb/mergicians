@@ -86,20 +86,18 @@ func render_elements (elements):
 	var dx = 128 * 0.3
 	var dy = 111 * 0.3
 	var claylimit = 2
-	var rocklimit = 16
+	var rocklimit = 50
 	keys.invert()
 
 	for key in keys:
 		var type = elements[key].z
 
-		if type > claylimit and type < rocklimit:
+		if type > claylimit:
 			continue
 
 		var island_part = pl_island_part.instance ()
-		if type <= claylimit:
+		if type < claylimit:
 			island_part.get_node ("clay").show ()
-		else:
-			island_part.get_node ("rocks").show ()
 
 		island_part.position = (Vector2 (elements[key].x * dx + (int (elements[key].y) % 2) * dx/2,
 		                                 elements[key].y * dy) +
@@ -114,6 +112,19 @@ func render_elements (elements):
 
 		var island_part = pl_island_part.instance ()
 		island_part.get_node ("grass").show ()
+		island_part.position = (Vector2 (elements[key].x * dx + (int (elements[key].y) % 2) * dx/2,
+		                                 elements[key].y * dy) +
+		                        Vector2 (rand_range (-7,7), rand_range (-7,7)))
+		island_part.rotation_degrees = rand_range (0,359)
+		self.add_child (island_part)
+
+	for key in keys:
+		var type = elements[key].z
+		if type < rocklimit:
+			continue
+
+		var island_part = pl_island_part.instance ()
+		island_part.get_node ("rocks").show ()
 		island_part.position = (Vector2 (elements[key].x * dx + (int (elements[key].y) % 2) * dx/2,
 		                                 elements[key].y * dy) +
 		                        Vector2 (rand_range (-7,7), rand_range (-7,7)))
