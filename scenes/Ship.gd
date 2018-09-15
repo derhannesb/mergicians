@@ -38,6 +38,8 @@ func _physics_process(delta):
 		$Camera2D.zoom *= 0.99
 	if Input.is_action_pressed ("zoom_out"):
 		$Camera2D.zoom /= 0.99
+	if Input.is_action_just_pressed ("toggle_fullscreen"):
+		OS.window_fullscreen = not OS.window_fullscreen
 		
 		#apply_impulse(Vector2(0,0), Vector2(-10,0))
 	#$Trail/TrailParticles.lifetime = linear_velocity.length() / 20
