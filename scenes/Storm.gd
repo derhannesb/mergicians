@@ -6,11 +6,13 @@ var max_energy = 100.0
 var energy = max_energy
 var energy_per_push = 0.25
 
-export var inner_radius = 20
-export var outer_radius = 1000 
+export var inner_radius = 120
+export var outer_radius = 200 
 
 var speed_factor = 0.01
 var direction = Vector2(0,0)
+
+const clip_boundary = 128
 
 func _ready():
 	var circle = CircleShape2D.new()
@@ -22,7 +24,7 @@ func _ready():
 	$Area2D/C2DOuter.shape.radius = outer_radius
 	
 	randomize()
-	direction = Vector2(rand_range(0,1), rand_range(0,1)) * energy * speed_factor
+	direction = Vector2(rand_range(-1,1), rand_range(-1,1)) * energy * speed_factor
 	
 func _physics_process(delta):
 	position += direction
@@ -44,8 +46,12 @@ func _physics_process(delta):
 				body.exit_storm()
 	modulate = Color(1,1,1,energy/max_energy)
 
-	if (energy == 0):
-		self.queue_free()	
+	if (energy == 0 
+	|| position.x  > Config.size.x + clip_boundary
+	|| position.y > Config.size.y + clip_boundary
+	|| position.x < -clip_boundary
+	|| position.y < -clip_boundary ):
+		self.queue_free()
 			
 func _on_Area2D_body_entered(body):
 	if (body.is_in_group("ship")):

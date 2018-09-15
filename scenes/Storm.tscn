@@ -74,8 +74,8 @@ _sections_unfolded = [ "Angle", "Angular Velocity", "Animation", "Color", "Dampi
 position = Vector2( 134.615, 95.3415 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
-inner_radius = 20
-outer_radius = 1000
+inner_radius = 120
+outer_radius = 200
 
 [node name="Graphics" type="Node2D" parent="." index="0"]
 
