@@ -6,9 +6,13 @@ var cooldown = 0
 var placement_speed = 3
 var placement_speed_rotation = 4
 
+var max_energy = 100
+var energy = max_energy / 2
+
+var storm = null
 
 func _ready():
-	pass
+	$EnergyBeam.hide()
 
 func _physics_process(delta):
 	if (cooldown > 0):
@@ -49,3 +53,28 @@ func _physics_process(delta):
 	# $Ship.rotation = position.angle_to (linear_velocity.normalized()) - PI/2 - rotation
 	$Sail.rotation = - rotation
 	
+	if (storm != null):
+		var distance = global_position.distance_to(storm.global_position)
+		$EnergyBeam.scale = Vector2(distance / storm.outer_radius, distance / storm.outer_radius) * 2
+		$EnergyBeam.global_position = storm.global_position
+		$EnergyBeam.rotation = -rotation + storm.global_position.angle_to_point(global_position) - PI
+
+
+func enter_storm(storm):
+	self.storm = storm
+	$EnergyBeam.show()
+	
+func exit_storm():
+	self.storm = null
+	$EnergyBeam.hide()
+	
+func push_energy(var energy):
+	update_energy(energy)
+
+func update_energy(add_energy):
+	self.energy += add_energy
+	if (self.energy < 0):
+		self.energy = 0
+	if (self.energy > self.max_energy):
+		self.energy = self.max_energy
+	$GUI/EnergyMeter.value = self.energy

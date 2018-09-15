@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Storm.gd" type="Script" id=1]
 [ext_resource path="res://gfx/cloud-medium.png" type="Texture" id=2]
@@ -87,23 +87,18 @@ tracks/0/keys = {
 "values": [ 0.0, 180.0, 359.0 ]
 }
 
-[sub_resource type="CircleShape2D" id=7]
-
-custom_solver_bias = 0.0
-radius = 150.0
-
 [node name="Storm" type="Node2D" groups=[
 "storm",
 ]]
 
-position = Vector2( 71.375, 97.5222 )
-rotation = 4.10463
+position = Vector2( 134.615, 95.3415 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+inner_radius = 20
+outer_radius = 1000
 
 [node name="Graphics" type="Node2D" parent="." index="0"]
 
-editor/display_folded = true
 rotation = 3.10261
 _sections_unfolded = [ "Transform" ]
 
@@ -175,9 +170,9 @@ audio_bus_override = false
 audio_bus_name = "Master"
 _sections_unfolded = [ "Collision" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+[node name="C2DInner" type="CollisionShape2D" parent="Area2D" index="0"]
 
-shape = SubResource( 7 )
+[node name="C2DOuter" type="CollisionShape2D" parent="Area2D" index="1"]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 

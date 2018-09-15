@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/Ship.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Storm.tscn" type="PackedScene" id=3]
 
-[node name="World" type="Node2D" index="0"]
+[node name="World" type="Node2D"]
 
 _sections_unfolded = [ "Transform" ]
 
@@ -14,10 +14,12 @@ script = ExtResource( 1 )
 
 [node name="Ship" parent="." index="1" instance=ExtResource( 2 )]
 
-position = Vector2( 297.948, 298.349 )
+position = Vector2( 398.61, 453.13 )
 
 [node name="Wind" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 304.394, 65.008 )
+inner_radius = 120
+outer_radius = 400
 
 

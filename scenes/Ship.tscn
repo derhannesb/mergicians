@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/Ship.gd" type="Script" id=1]
 [ext_resource path="res://gfx/compass.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://gfx/cloud-shape3.png" type="Texture" id=4]
 [ext_resource path="res://gfx/WizardBoat.png" type="Texture" id=5]
 [ext_resource path="res://gfx/Sail.png" type="Texture" id=6]
+[ext_resource path="res://fonts/JosefinSans-Bold.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/EnergyBeam.tres" type="Material" id=8]
+[ext_resource path="res://gfx/cloud-shape1.png" type="Texture" id=9]
 
 [sub_resource type="Gradient" id=1]
 
@@ -76,11 +79,77 @@ _sections_unfolded = [ "Angular Velocity", "Color", "Emission Shape", "Flags", "
 custom_solver_bias = 0.0
 radius = 25.0
 
+[sub_resource type="StyleBoxFlat" id=7]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 0.166351, 0.640995, 0.925781, 1 )
+draw_center = true
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color( 0.8, 0.8, 0.8, 1 )
+border_blend = false
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+_sections_unfolded = [ "Border" ]
+
+[sub_resource type="StyleBoxFlat" id=8]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 0.6, 0.6, 0.6, 0.237569 )
+draw_center = true
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color( 0.8, 0.8, 0.8, 1 )
+border_blend = false
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+
+[sub_resource type="DynamicFont" id=9]
+
+size = 30
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 7 )
+_sections_unfolded = [ "Font", "Settings" ]
+
 [node name="Ship" type="RigidBody2D" index="0" groups=[
 "ship",
 ]]
 
 position = Vector2( 299.754, 213.451 )
+rotation = 0.646455
 input_pickable = false
 collision_layer = 3
 collision_mask = 1
@@ -130,6 +199,8 @@ _sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Smoothing", "Transform
 
 [node name="Placement" type="Node2D" parent="." index="1"]
 
+editor/display_folded = true
+
 [node name="PlacementCircle" type="Sprite" parent="Placement" index="0"]
 
 editor/display_folded = true
@@ -147,6 +218,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Trail" type="Node2D" parent="." index="2"]
 
+editor/display_folded = true
 rotation = -3.14159
 _sections_unfolded = [ "Transform" ]
 
@@ -189,5 +261,65 @@ position = Vector2( 0.246002, -3.451 )
 texture = ExtResource( 6 )
 offset = Vector2( 5, -15 )
 _sections_unfolded = [ "Offset" ]
+
+[node name="GUI" type="CanvasLayer" parent="." index="6"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="EnergyMeter" type="ProgressBar" parent="GUI" index="0"]
+
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -388.0
+margin_top = -82.0
+margin_right = -36.0
+margin_bottom = -36.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 50.0
+exp_edit = false
+rounded = false
+percent_visible = true
+_sections_unfolded = [ "Grow Direction", "Margin", "Percent", "Rect", "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="EnergyBeam" type="Particles2D" parent="." index="7"]
+
+rotation = -0.496117
+emitting = true
+amount = 32
+lifetime = 2.0
+one_shot = false
+preprocess = 1.0
+speed_scale = 10.0
+explosiveness = 0.25
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = ExtResource( 8 )
+texture = ExtResource( 9 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Material", "Process Material", "Textures", "Time", "Transform" ]
 
 
