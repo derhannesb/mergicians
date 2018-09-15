@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://gfx/windmill.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Windmill.gd" type="Script" id=1]
+[ext_resource path="res://gfx/windmill.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 
@@ -21,16 +22,23 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 3 ]
 }
 
-[node name="Windmill" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=2]
 
-editor/display_folded = true
+custom_solver_bias = 0.0
+extents = Vector2( 72, 36 )
+
+[node name="Windmill" type="Node2D" groups=[
+"windmill",
+]]
+
 position = Vector2( 77.6729, 149.024 )
+script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 hframes = 4
-frame = 3
+frame = 2
 _sections_unfolded = [ "Animation", "Transform" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
@@ -39,9 +47,29 @@ root_node = NodePath("..")
 autoplay = "milling"
 playback_process_mode = 1
 playback_default_blend_time = 1.0
-playback_speed = 4.0
+playback_speed = 3.0
 anims/milling = SubResource( 1 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
+
+[node name="Area2D" type="Area2D" parent="." index="2" groups=[
+"windmill",
+]]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 2
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+position = Vector2( -0.468994, 3.28291 )
+shape = SubResource( 2 )
 
 

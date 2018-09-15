@@ -90,7 +90,6 @@ tracks/0/keys = {
 "windgenerator",
 ]]
 
-editor/display_folded = true
 position = Vector2( 368.23, 118.955 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -126,7 +125,7 @@ rotation = 0.016979
 enabled = true
 exclude_parent = true
 cast_to = Vector2( 0, 150 )
-collision_mask = 1
+collision_mask = 2
 _sections_unfolded = [ "Transform" ]
 
 [node name="Target" type="Node2D" parent="." index="2"]

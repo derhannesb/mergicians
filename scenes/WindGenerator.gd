@@ -24,4 +24,7 @@ func _physics_process(delta):
 		var collider = $RayCast2D.get_collider()
 		if (collider.is_in_group("ship")):
 			collider.apply_impulse(Vector2(0,0), $Target.position.rotated(rotation)*strength)
+		
+		if (collider.is_in_group("windmill")):
+			collider.get_parent().blow(strength)
 			
