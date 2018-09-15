@@ -23,9 +23,10 @@ func _physics_process(delta):
 	#$Particles2D.process_material.initial_velocity = energy
 	if $RayCast2D.is_colliding():
 		var collider = $RayCast2D.get_collider()
-		if (collider.is_in_group("ship")):
-			collider.apply_impulse(Vector2(0,0), $Target.position.rotated(rotation)*strength)
-		
-		if (collider.is_in_group("windmill")):
-			collider.get_parent().blow(strength)
-			generated_by.increase_score(1)
+		if (collider != null):
+			if (collider.is_in_group("ship")):
+				collider.apply_impulse(Vector2(0,0), $Target.position.rotated(rotation)*strength)
+			
+			if (collider.is_in_group("windmill")):
+				collider.get_parent().blow(strength)
+				generated_by.increase_score(1)

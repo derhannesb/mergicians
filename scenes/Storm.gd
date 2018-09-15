@@ -48,6 +48,9 @@ func _physics_process(delta):
 			var normalized_difference = position_difference.normalized()
 	
 			body.apply_impulse(Vector2(0,0), normalized_difference*(inner_radius+60-distance ))
+			
+			body.increase_damage(0.4)
+			
 			energy -= energy_per_push 
 		else:
 			#push energy to boat:

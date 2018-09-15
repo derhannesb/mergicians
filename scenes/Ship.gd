@@ -13,6 +13,11 @@ var storm = null
 
 var score = 0
 
+var max_health = 100
+var health = max_health
+
+var wind_cost = 5
+
 func _ready():
 	$EnergyBeam.hide()
 
@@ -68,9 +73,9 @@ func exit_storm():
 
 func add_wind_generator():
 	if (energy > 0):
-		var energy_slice = 10
-		if (energy-10 < 0):
-			energy_slice += energy-10
+		var energy_slice = wind_cost
+		if (energy-wind_cost < 0):
+			energy_slice += energy-wind_cost
 			energy = 0
 		
 		update_energy(-energy_slice)
@@ -95,8 +100,29 @@ func update_energy(add_energy):
 		self.energy = self.max_energy
 	$GUI/EnergyMeter.value = self.energy
 	
+func update_health(add_health):
+	health += add_health
+	if (health < 0):
+		health = 0
+		energy = 0
+		$GUI/Announcement/AnimationPlayer.play("GameOver")
+		$GUI/Announcement.show()
+		#self.queue_free()
+		self.collision_layer = 0
+		self.collision_mask = 0
+		self.MODE_STATIC
+		
+	if (health > max_health):
+		health = max_health
+	$GUI/Health.value = health
+	
+		
 func increase_score(value):
 	score+=value
 	$GUI/Score.text = str(score)
 	$GUI/ScoreAnimationPlayer.play("Score")
+
+func increase_damage(value):
+	update_health(-value)
+
 	
