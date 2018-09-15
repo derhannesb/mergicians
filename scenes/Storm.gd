@@ -9,6 +9,9 @@ var energy_per_push = 0.25
 export var inner_radius = 20
 export var outer_radius = 1000 
 
+var speed_factor = 0.01
+var direction = Vector2(0,0)
+
 func _ready():
 	var circle = CircleShape2D.new()
 	$Area2D/C2DInner.shape = circle
@@ -18,7 +21,11 @@ func _ready():
 	$Area2D/C2DOuter.shape = circle
 	$Area2D/C2DOuter.shape.radius = outer_radius
 	
+	randomize()
+	direction = Vector2(rand_range(0,1), rand_range(0,1)) * energy * speed_factor
+	
 func _physics_process(delta):
+	position += direction
 	for body in trapped:
 		var distance = body.global_position.distance_to(global_position)
 		if (distance <= inner_radius):
