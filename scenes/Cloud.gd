@@ -1,11 +1,15 @@
 extends Node2D
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+var direction = Vector2(0,0)
+const clip_boundary = 128
+
+signal cloud_removed
 
 func _ready():
 	var shape = randi () % 3
+	
+	direction = Vector2 (rand_range (-0.5, 0.5),
+	                     rand_range (-0.5, 0.5))
 	
 	if shape == 0:
 		$shape1.visible = true
@@ -33,7 +37,16 @@ func set_thickness (var percentage):
 		$medium.visible = true
 		$thick.visible = true
 		
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func _process(delta):
+	position += direction
+	
+	if (position.x  > Config.size.x + clip_boundary):
+		position.x -= Config.size.x + 2*clip_boundary - 2
+	elif (position.x < -clip_boundary):
+		position.x += Config.size.x + 2*clip_boundary - 2
+		
+	if (position.y  > Config.size.y + clip_boundary):
+		position.y -= Config.size.y + 2*clip_boundary - 2
+	elif (position.y < -clip_boundary):
+		position.y += Config.size.y + 2*clip_boundary - 2
+
