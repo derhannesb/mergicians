@@ -20,6 +20,7 @@ var wind_cost = 5
 
 func _ready():
 	$EnergyBeam.hide()
+	$GUI/Announcement.hide()
 
 func _physics_process(delta):
 	if (cooldown > 0):
@@ -105,7 +106,7 @@ func update_health(add_health):
 	if (health < 0):
 		health = 0
 		energy = 0
-		$GUI/Announcement/AnimationPlayer.play("GameOver")
+		$GUI/Announcement/AnnouncementLabel/AnimationPlayer.play("GameOver")
 		$GUI/Announcement.show()
 		# self.queue_free()
 		self.linear_damp = 1000
@@ -123,4 +124,5 @@ func increase_score(value):
 func increase_damage(value):
 	update_health(-value)
 
-	
+func _on_RestartButton_pressed():
+	get_tree().change_scene("res://scenes/Main.tscn")

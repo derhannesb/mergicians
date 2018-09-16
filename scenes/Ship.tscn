@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/Ship.gd" type="Script" id=1]
 [ext_resource path="res://gfx/compass.png" type="Texture" id=2]
@@ -212,7 +212,35 @@ tracks/0/keys = {
 "values": [ Vector2( 1579, 40 ), Vector2( 1579, 5 ), Vector2( 1579, 40 ) ]
 }
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="StyleBoxFlat" id=12]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 0.29657, 0.882812, 0.30573, 1 )
+draw_center = true
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color( 0.8, 0.8, 0.8, 1 )
+border_blend = false
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+
+[sub_resource type="DynamicFont" id=13]
 
 size = 120
 use_mipmaps = false
@@ -220,9 +248,8 @@ use_filter = false
 font_data = ExtResource( 10 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 
-resource_name = "GameOver"
 length = 1.5
 loop = true
 step = 0.1
@@ -251,9 +278,8 @@ tracks/1/keys = {
 "values": [ "GAME OVER" ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 
-resource_name = "Victory"
 length = 1.0
 loop = false
 step = 0.1
@@ -510,41 +536,69 @@ playback_speed = 1.0
 anims/Score = SubResource( 11 )
 blend_times = [  ]
 
-[node name="Announcement" type="Label" parent="GUI" index="4"]
+[node name="Announcement" type="Node2D" parent="GUI" index="4"]
 
-editor/display_folded = true
-visible = false
+[node name="RestartButton" type="Button" parent="GUI/Announcement" index="0"]
+
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -380.0
-margin_top = -60.0
-margin_right = 380.0
-margin_bottom = 60.0
-rect_rotation = -0.611839
+margin_left = 825.498
+margin_top = 637.559
+margin_right = 1042.5
+margin_bottom = 713.559
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/normal = SubResource( 12 )
+custom_fonts/font = ExtResource( 7 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "RESTART"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_styles" ]
+
+[node name="AnnouncementLabel" type="Label" parent="GUI/Announcement" index="1"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 544.943
+margin_top = 486.009
+margin_right = 1304.94
+margin_bottom = 606.009
+rect_rotation = -5.64725
 rect_pivot_offset = Vector2( 383.789, 49.9961 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 13 )
 text = "GAME OVER"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect", "custom_fonts" ]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="GUI/Announcement" index="0"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GUI/Announcement/AnnouncementLabel" index="0"]
 
 root_node = NodePath("..")
 autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/GameOver = SubResource( 13 )
-anims/Victory = SubResource( 14 )
+anims/GameOver = SubResource( 14 )
+anims/Victory = SubResource( 15 )
 blend_times = [  ]
 
 [node name="EnergyBeam" type="Particles2D" parent="." index="7"]
@@ -569,5 +623,7 @@ normal_map = null
 h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Material", "Process Material", "Textures", "Time", "Transform" ]
+
+[connection signal="pressed" from="GUI/Announcement/RestartButton" to="." method="_on_RestartButton_pressed"]
 
 
