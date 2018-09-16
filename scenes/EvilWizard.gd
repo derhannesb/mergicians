@@ -5,7 +5,7 @@ var on_island = true
 var speed = 50
 var time_to_change = rand_range(2,6)
 
-var next_cloud = rand_range(0,4)
+var next_cloud = rand_range(5,10)
 
 func _ready():
 	randomize()
@@ -33,6 +33,7 @@ func _physics_process(delta):
 		time_to_change = rand_range(2,6)
 		
 	if (next_cloud <= 0 && Config.weather != null):
+		$Particles2D.emitting = true
 		Config.weather.generate_cloud(self.position, current_direction)	
 		next_cloud = rand_range(10,30)
 	

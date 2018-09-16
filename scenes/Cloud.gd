@@ -7,7 +7,7 @@ var target_scale = Vector2(0,0)
 
 var stormy = false
 
-var lightning_countdown = rand_range(0,5)
+var lightning_countdown = rand_range(3,10)
 
 func _ready():
 	var shape = randi () % 3
@@ -62,12 +62,12 @@ func _process(delta):
 		position.y += Config.size.y + 2*clip_boundary - 2
 
 	if (scale < target_scale):
-		scale.x += 0.01
-		scale.y += 0.01
+		scale.x += 0.005
+		scale.y += 0.005
 
 func lightning_strike():
 	$Lightning/AnimationPlayer.play("LightningStrike")
-	lightning_countdown = rand_range(0,5)
+	lightning_countdown = rand_range(3,10)
 	
 
 func _on_Area2D_body_entered(body):
