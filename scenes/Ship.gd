@@ -107,10 +107,9 @@ func update_health(add_health):
 		energy = 0
 		$GUI/Announcement/AnimationPlayer.play("GameOver")
 		$GUI/Announcement.show()
-		#self.queue_free()
-		self.collision_layer = 0
-		self.collision_mask = 0
-		self.MODE_STATIC
+		# self.queue_free()
+		self.friction = 1000
+		self.linear_damp = 1000
 		
 	if (health > max_health):
 		health = max_health
