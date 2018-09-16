@@ -30,3 +30,7 @@ func _physics_process(delta):
 			if (collider.is_in_group("windmill")):
 				collider.get_parent().blow(strength)
 				generated_by.increase_score(1)
+			
+			if (collider.is_in_group("evilwizard")):
+				collider.increase_damage(-strength*10)
+				generated_by.increase_score(1)	

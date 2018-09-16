@@ -7,6 +7,8 @@ var time_to_change = rand_range(2,6)
 
 var next_cloud = rand_range(5,10)
 
+var health = 100
+
 func _ready():
 	randomize()
 	change_direction()
@@ -36,4 +38,13 @@ func _physics_process(delta):
 		$Particles2D.emitting = true
 		Config.weather.generate_cloud(self.position, current_direction)	
 		next_cloud = rand_range(10,30)
+
+func increase_damage(value):
+	update_health(-value)
 	
+func update_health(add_health):
+	health += add_health
+	print("Wizard Health:" + str(health))
+	if (health <= 0):
+		queue_free()
+		

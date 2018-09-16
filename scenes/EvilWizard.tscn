@@ -97,7 +97,10 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Scale" ]
 
-[node name="EvilWizard" type="KinematicBody2D" index="0"]
+[node name="EvilWizard" type="KinematicBody2D" index="0" groups=[
+"EvilWizard",
+"evilwizard",
+]]
 
 input_pickable = false
 collision_layer = 2
@@ -114,7 +117,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
-editor/display_folded = true
 texture = ExtResource( 2 )
 hframes = 9
 _sections_unfolded = [ "Animation" ]
