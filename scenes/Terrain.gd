@@ -90,7 +90,7 @@ func get_free_space ():
 		x += (randi () % 3) - 1
 		y += (randi () % 3) - 1
 
-	return Vector2 (x, y)
+	return Vector2 (x*dx + (y%2)*dx/2, y*dy)
 	
 func generate_islands ():
 	var elements = Dictionary()

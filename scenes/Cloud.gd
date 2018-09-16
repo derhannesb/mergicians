@@ -3,8 +3,6 @@ extends Node2D
 var direction = Vector2(0,0)
 const clip_boundary = 128
 
-signal cloud_removed
-
 func _ready():
 	var shape = randi () % 3
 	
