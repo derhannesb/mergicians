@@ -24,6 +24,15 @@ func _ready():
 	generate_windmills ()
 	generate_wizards()
 
+func process(delta):
+	var has_wizard = false
+	for child in get_children():
+		if (child.is_in_group("evilwizard")):
+			has_wizard = true
+	if (!has_wizard):
+		print("VICTORY")
+			
+
 func generate_water ():
 	var bigprime = 9973
 	var num_x = int (size.x / 111 + 1)

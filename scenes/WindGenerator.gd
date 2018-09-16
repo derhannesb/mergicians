@@ -32,5 +32,5 @@ func _physics_process(delta):
 				generated_by.increase_score(1)
 			
 			if (collider.is_in_group("evilwizard")):
-				collider.increase_damage(-strength*10)
+				collider.increase_damage(strength*133)
 				generated_by.increase_score(1)	
