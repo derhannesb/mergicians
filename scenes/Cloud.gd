@@ -21,20 +21,17 @@ func set_thickness (var percentage):
 	var g = min (1.0, 1.5 - percentage)
 	
 	if percentage < 1.0/3:
-		a = percentage * 3
-		$thin.modulate   = Color (a*g, a*g, a*g, a)
-		$medium.modulate = Color (1, 1, 1, 0)
-		$thick.modulate  = Color (1, 1, 1, 0)
+		$thin.visible = true
+		$medium.visible = false
+		$thick.visible = false
 	elif percentage < 2.0/3:
-		a = (percentage - 1.0/3) * 3
-		$thin.modulate   = Color (g, g, g, 1)
-		$medium.modulate = Color (a*g, a*g, a*g, a)
-		$thick.modulate  = Color (1, 1, 1, 0)
+		$thin.visible = true
+		$medium.visible = true
+		$thick.visible = false
 	else:
-		a = (percentage - 2.0/3) * 3
-		$thin.modulate   = Color (g, g, g, 1)
-		$medium.modulate = Color (g, g, g, 1)
-		$thick.modulate  = Color (a*g, a*g, a*g, a)
+		$thin.visible = true
+		$medium.visible = true
+		$thick.visible = true
 		
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
