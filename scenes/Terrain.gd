@@ -76,6 +76,22 @@ func shuffleList (var list):
 		indexList.remove(x)
 	return shuffledList
 
+func get_free_space ():
+	var num_x = int (size.x / (128 * 0.3) + 1)
+	var num_y = int (size.y / (111 * 0.3) + 2)
+	
+	var x = num_x / 2
+	var y = num_y / 2
+	
+	while true:
+		var key = str (x) + "," + str (y)
+		if not elements.has (key):
+			break
+		x += (randi () % 3) - 1
+		y += (randi () % 3) - 1
+
+	return Vector2 (x, y)
+	
 func generate_islands ():
 	var elements = Dictionary()
 	var num_x = int (size.x / (128 * 0.3) + 1)
