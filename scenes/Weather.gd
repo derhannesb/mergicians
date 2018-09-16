@@ -10,6 +10,8 @@ func _ready():
 	
 	for i in range (30 + randi() % 100):
 		var cloud = pl_cloud.instance ()
+		var s = rand_range (0.6, 1.0)
+		cloud.scale = Vector2 (s, s)
 		cloud.position = Vector2 (rand_range (0.0, size.x),
 		                          rand_range (0.0, size.y))
 		self.add_child (cloud)
