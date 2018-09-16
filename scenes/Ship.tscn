@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/Ship.gd" type="Script" id=1]
 [ext_resource path="res://gfx/compass.png" type="Texture" id=2]
 [ext_resource path="res://gfx/arrow.png" type="Texture" id=3]
-[ext_resource path="res://gfx/cloud-shape3.png" type="Texture" id=4]
+[ext_resource path="res://gfx/bugwelle.png" type="Texture" id=4]
 [ext_resource path="res://gfx/WizardBoat.png" type="Texture" id=5]
 [ext_resource path="res://gfx/Sail.png" type="Texture" id=6]
 [ext_resource path="res://fonts/DefaultFont.tres" type="DynamicFont" id=7]
@@ -47,7 +47,7 @@ flag_disable_z = true
 spread = 45.0
 flatness = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 1.0
+initial_velocity = 0.0
 initial_velocity_random = 0.0
 angular_velocity = 0.0
 angular_velocity_random = 0.0
@@ -61,9 +61,9 @@ tangential_accel = 0.0
 tangential_accel_random = 0.0
 damping = 0.0
 damping_random = 0.0
-angle = 0.0
+angle = -40.0
 angle_random = 0.0
-scale = 0.25
+scale = 0.5
 scale_random = 0.0
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
@@ -74,7 +74,7 @@ anim_speed_random = 0.0
 anim_offset = 0.0
 anim_offset_random = 0.0
 anim_loop = false
-_sections_unfolded = [ "Angular Velocity", "Color", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Scale", "Spread", "Trail" ]
+_sections_unfolded = [ "Angle", "Angular Velocity", "Color", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Linear Accel", "Radial Accel", "Scale", "Spread", "Trail" ]
 
 [sub_resource type="CircleShape2D" id=6]
 
@@ -297,8 +297,8 @@ tracks/0/keys = {
 }
 
 [node name="Ship" type="RigidBody2D" index="0" groups=[
-"ship",
 "Ship",
+"ship",
 ]]
 
 position = Vector2( 299.754, 213.451 )
@@ -371,9 +371,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Trail" type="Node2D" parent="." index="2"]
 
-editor/display_folded = true
 rotation = -3.14159
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
 
 [node name="Particles2D" type="Particles2D" parent="Trail" index="0"]
 
@@ -395,7 +394,7 @@ texture = ExtResource( 4 )
 normal_map = null
 h_frames = 1
 v_frames = 1
-_sections_unfolded = [ "Drawing", "Process Material", "Time" ]
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 

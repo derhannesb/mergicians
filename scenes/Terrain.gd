@@ -128,7 +128,6 @@ func generate_islands ():
 	render_elements ()
 
 func generate_island (var start_position):
-
 	for a in range (0, 20 + rand_range (1, 100)):
 		var x = int (start_position.x)
 		var y = int (start_position.y)
@@ -233,7 +232,7 @@ func generate_wizards ():
 	
 	for key in keys:
 		var e = elements[key]
-		if e.z >= rocklimit:
+		if e.z > claylimit:
 			var wiz = pl_wizard.instance ()
 			wiz.position = Vector2 (e.x * dx + (int (e.y) % 2) * dx/2, e.y * dy)
 			self.add_child (wiz)
