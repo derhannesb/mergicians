@@ -4,6 +4,7 @@ var pl_island_part = preload("res://scenes/IslandPart.tscn")
 var pl_water_part = preload("res://scenes/WaterPart.tscn")
 var pl_waterfall_part = preload("res://scenes/WaterFallPart.tscn")
 var pl_windmill = preload("res://scenes/Windmill.tscn")
+var pl_wizard = preload("res://scenes/EvilWizard.tscn")
 
 var size
 var elements
@@ -21,6 +22,7 @@ func _ready():
 	generate_boundary ()
 	generate_islands ()
 	generate_windmills ()
+	generate_wizards()
 
 func generate_water ():
 	var bigprime = 9973
@@ -223,4 +225,20 @@ func generate_windmills ():
 			if num_mills <= 0:
 				break
 		
+func generate_wizards ():
+	var keys = elements.keys ()
+	keys = shuffleList (keys)
 	
+	var num_wizs= 50 + randi () % 20
+	
+	for key in keys:
+		var e = elements[key]
+		if e.z >= rocklimit:
+			var wiz = pl_wizard.instance ()
+			wiz.position = Vector2 (e.x * dx + (int (e.y) % 2) * dx/2, e.y * dy)
+			self.add_child (wiz)
+			num_wizs -= 1
+			if num_wizs <= 0:
+				break
+		
+		

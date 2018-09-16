@@ -3,6 +3,8 @@ extends Node2D
 var direction = Vector2(0,0)
 const clip_boundary = 128
 
+var target_scale = Vector2(0,0)
+
 func _ready():
 	var shape = randi () % 3
 	
@@ -48,3 +50,7 @@ func _process(delta):
 	elif (position.y < -clip_boundary):
 		position.y += Config.size.y + 2*clip_boundary - 2
 
+	if (scale < target_scale):
+		scale.x += 0.01
+		scale.y += 0.01
+		
