@@ -2,6 +2,7 @@ extends Node2D
 
 var pl_island_part = preload("res://scenes/IslandPart.tscn")
 var pl_water_part = preload("res://scenes/WaterPart.tscn")
+var pl_waterfall_part = preload("res://scenes/WaterFallPart.tscn")
 var pl_windmill = preload("res://scenes/Windmill.tscn")
 
 var size
@@ -27,13 +28,35 @@ func generate_water ():
 	var num_y = int (size.y / 128 + 2)
 	for i in range(0, num_x):
 		for a in range(0, num_y):
-			var water_part = pl_water_part.instance ()
+			var waterpart
 			var x = (i*bigprime) % num_x
 			var y = (a*bigprime) % num_y
-			water_part.position.x = x * 111
-			water_part.position.y = y * 128 - (x%2)*64
-			water_part.rotation_degrees = rand_range (0, 360)
-			self.add_child (water_part)
+			if x == 0 and y != 0:
+				waterpart = pl_waterfall_part.instance ()
+				waterpart.position.x = - 80
+				waterpart.position.y = y * 128 - 80
+				waterpart.rotation_degrees = 90 + rand_range (-20, 20)
+			elif y == 0 and x != num_x - 1:
+				waterpart = pl_waterfall_part.instance ()
+				waterpart.position.x = x * 111 + 55
+				waterpart.position.y = - 80
+				waterpart.rotation_degrees = 180 + rand_range (-20, 20)
+			elif x == num_x - 1 and y != num_y - 1:
+				waterpart = pl_waterfall_part.instance ()
+				waterpart.position.x = (num_x-1) * 111 + 120
+				waterpart.position.y = y * 128 + 40
+				waterpart.rotation_degrees = 270 + rand_range (-20, 20)
+			elif y == num_y - 1:
+				waterpart = pl_waterfall_part.instance ()
+				waterpart.position.x = x * 111
+				waterpart.position.y = (num_y-1) * 128
+				waterpart.rotation_degrees = 0 + rand_range (-20, 20)
+			else:
+				waterpart = pl_water_part.instance ()
+				waterpart.position.x = x * 111
+				waterpart.position.y = y * 128 - (x%2)*64
+				waterpart.rotation_degrees = rand_range (0, 360)
+			self.add_child (waterpart)
 
 func generate_boundary ():
 	for x in range (0, int (size.x / dx) + 1):
