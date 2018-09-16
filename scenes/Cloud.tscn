@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Cloud.gd" type="Script" id=1]
 [ext_resource path="res://gfx/cloud-thin.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://gfx/cloud-shape2.png" type="Texture" id=6]
 [ext_resource path="res://gfx/cloud-shape3.png" type="Texture" id=7]
 [ext_resource path="res://gfx/Flash.png" type="Texture" id=8]
+[ext_resource path="res://sfx/donner.ogg" type="AudioStream" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -68,7 +69,7 @@ tracks/3/keys = {
 "values": [ true, false ]
 }
 
-[node name="Cloud" type="Node2D"]
+[node name="Cloud" type="Node2D" index="0"]
 
 scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 1 )
@@ -160,6 +161,15 @@ playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/LightningStrike = SubResource( 2 )
 blend_times = [  ]
+
+[node name="Thunder" type="AudioStreamPlayer" parent="." index="7"]
+
+stream = ExtResource( 9 )
+volume_db = -30.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 [connection signal="body_entered" from="Lightning/Area2D" to="." method="_on_Area2D_body_entered"]
 

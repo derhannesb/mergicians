@@ -92,7 +92,7 @@ tracks/1/keys = {
 "values": [ 0.0, -23.523, 37.653, 49.9843 ]
 }
 
-[node name="Menu" type="Node2D" index="0"]
+[node name="Menu" type="Node2D"]
 
 script = ExtResource( 1 )
 

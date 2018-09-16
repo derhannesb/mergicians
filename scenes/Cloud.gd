@@ -9,6 +9,8 @@ var stormy = false
 
 var lightning_countdown = rand_range(3,10)
 
+var thickness = 0.0
+
 func _ready():
 	var shape = randi () % 3
 	
@@ -22,23 +24,26 @@ func _ready():
 	elif shape == 2:
 		$shape3.visible = true
 		
-	var thickness = 0.0
 	if (stormy):
 		thickness = rand_range (1.0/3, 1.0)
 	
 	self.set_thickness (thickness)
 
 func set_thickness (var percentage):
-	var g = min (1.0, 1.5 - percentage)
+	thickness = percentage
 	
-	if percentage < 1.0/3:
+	if percentage < 1.0/4:
+		$thin.visible = false
+		$medium.visible = false
+		$thick.visible = false
+	elif percentage < 2.0/4:
 		$thin.visible = true
 		$medium.visible = false
 		$thick.visible = false
-	elif percentage < 2.0/3:
+	elif percentage < 3.0/4:
 		$thin.visible = true
 		$medium.visible = true
-		$thick.visible = false
+		$thick.visible = false		
 	else:
 		$thin.visible = true
 		$medium.visible = true
@@ -66,11 +71,19 @@ func _process(delta):
 		scale.y += 0.005
 
 func lightning_strike():
-	$Lightning/AnimationPlayer.play("LightningStrike")
-	lightning_countdown = rand_range(3,10)
-	
-
+	if (thickness > 0):
+		$Lightning/AnimationPlayer.play("LightningStrike")
+		$Thunder.volume_db = -30
+		$Thunder.play()
+		lightning_countdown = rand_range(3,10)
+		self.set_thickness(max(0, thickness-0.25))
+	else:
+		self.queue_free()
+		
 func _on_Area2D_body_entered(body):
 	if (body.is_in_group("Ship")):
 		body.increase_damage(10)
+		$Thunder.volume_db = 10
+		$Thunder.play()
+		
 		
