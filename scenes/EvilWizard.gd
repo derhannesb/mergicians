@@ -5,7 +5,7 @@ var on_island = true
 var speed = 50
 var time_to_change = rand_range(2,6)
 
-var next_cloud = rand_range(10,30)
+var next_cloud = rand_range(0,4)
 
 func _ready():
 	randomize()

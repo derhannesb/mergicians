@@ -27,6 +27,7 @@ func generate_cloud(initial_position = null, initial_direction = null):
 	
 	if (initial_position != null):
 		cloud.position = initial_position
+		cloud.stormy = true
 	
 	if (initial_direction != Vector2(0,0)):
 		cloud.direction = initial_direction

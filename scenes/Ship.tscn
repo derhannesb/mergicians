@@ -298,6 +298,7 @@ tracks/0/keys = {
 
 [node name="Ship" type="RigidBody2D" index="0" groups=[
 "ship",
+"Ship",
 ]]
 
 position = Vector2( 299.754, 213.451 )
